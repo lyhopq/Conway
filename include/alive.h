@@ -9,6 +9,7 @@ public:
 	Alive(int px, int py);
 	virtual ~Alive();
 
+	bool isAlive() const;
 	const char show() const;
 };
 #endif

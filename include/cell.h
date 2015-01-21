@@ -8,8 +8,8 @@ public:
 	virtual ~Cell();
 
 	virtual const char show() const = 0;
+	virtual bool isAlive() const = 0;
 
-private:
 	int px;
 	int py;
 };

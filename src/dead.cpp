@@ -9,6 +9,11 @@ Dead::~Dead()
 {
 }
 
+bool Dead::isAlive() const
+{
+	return false;
+}
+
 const char Dead::show() const
 {
 	return ' ';

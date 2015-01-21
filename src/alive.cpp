@@ -9,6 +9,11 @@ Alive::~Alive()
 {
 }
 
+bool Alive::isAlive() const
+{
+	return true;
+}
+
 const char Alive::show() const
 {
 	return '$';

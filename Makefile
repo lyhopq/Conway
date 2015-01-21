@@ -1,7 +1,7 @@
 EXECUTABLE := main
 LIBS :=
-INCLUDES := src
-SRCDIR:= . $(INCLUDES)
+INCLUDES := include
+SRCDIR:= . src
 CC:=g++
 CPPFLAGS := -g -Wall -O3
 CPPFLAGS += $(addprefix -I,$(INCLUDES))
@@ -17,6 +17,7 @@ objs : $(OBJS)
 
 clean :
 	rm -f *.o
+	rm -f src/*.o
 	rm -f $(EXECUTABLE)
 
 $(EXECUTABLE) : $(OBJS)

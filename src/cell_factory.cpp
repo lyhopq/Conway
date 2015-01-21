@@ -4,7 +4,6 @@
 
 Cell* CellFactory::NewCell(int px, int py, char status)
 {
-	// return status == '1' ? new Alive(px, py) : new Dead(px, py);
 	if('1' == status)
 	{
 		return new Alive(px, py);
