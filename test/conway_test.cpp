@@ -6,7 +6,8 @@
 TEST(cell_factory_test, gernate_new_cell)
 {
 	CellFactory factory;
-    EXPECT_EQ(new Alive(0, 0), factory.NewCell(0, 0, '1'));
+    EXPECT_EQ('$', factory.NewCell(0, 0, '1')->show());
+    EXPECT_EQ(' ', factory.NewCell(0, 0, '0')->show());
 }
 
 
