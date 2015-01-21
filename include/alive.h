@@ -10,6 +10,7 @@ public:
 	virtual ~Alive();
 
 	bool isAlive() const;
+	bool isStatusChanged(int count) const;
 	const char show() const;
 };
 #endif

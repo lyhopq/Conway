@@ -11,3 +11,18 @@ Cell* CellFactory::NewCell(int px, int py, char status)
 
 	return new Dead(px, py);
 }
+
+Cell* CellFactory::changeCell(Cell *cell)
+{
+	Cell *newCell;
+	if(cell->isAlive())
+	{
+		newCell = new Dead(cell->px, cell->py);	
+	}
+	else
+	{
+		newCell = new Alive(cell->px, cell->py);
+	}
+
+	return newCell;
+}

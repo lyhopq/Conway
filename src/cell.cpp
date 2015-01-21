@@ -8,3 +8,8 @@ Cell::Cell(int _px, int _py)
 Cell::~Cell()
 {
 }
+
+int Cell::index() const
+{
+	return px * py;
+}

@@ -7,5 +7,6 @@ class CellFactory
 {
 public:
 	Cell* NewCell(int px, int py, char status);
+	Cell* changeCell(Cell* cell);
 };
 #endif

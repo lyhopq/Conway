@@ -7,8 +7,11 @@ public:
 	Cell(int px, int py);
 	virtual ~Cell();
 
-	virtual const char show() const = 0;
 	virtual bool isAlive() const = 0;
+	virtual bool isStatusChanged(int count) const = 0;
+	virtual const char show() const = 0;
+
+	int index() const;
 
 	int px;
 	int py;

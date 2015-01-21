@@ -33,11 +33,21 @@ void Conway::getSeed()
 
 void Conway::step()
 {
-	for(vector<Cell*>::iterator iter = cells.begin(); iter != cells.end(); ++iter)
+	CellFactory factory;
+	vector<Cell*> changedCells;
+	for(int index = 0; index < cells.size(); index++)
 	{
-		int aliveNeighs = countAliveNeighbours(*iter);
-		cout << aliveNeighs << endl;
+		Cell *cell = cells[index];
+		int aliveNeighs = countAliveNeighbours(cell);
+		// cout << cell->px << cell->py << aliveNeighs << endl;
+		if(cell->isStatusChanged(aliveNeighs))
+		{
+			changedCells.push_back(factory.changeCell(cell));
+		}
+
 	}
+
+	update(changedCells);
 }
 
 void Conway::dump() const
@@ -58,12 +68,12 @@ void Conway::dump() const
 vector<Cell*> Conway::neighbours(Cell *cell) const
 {
 	vector<Cell*> neighs;
-	for(int r = cell->px - 1; r < cell->px + 1; r++)
+	for(int r = cell->px - 1; r <= cell->px + 1; r++)
 	{
-		for(int c = cell->py - 1; c < cell->py + 1; c++)
+		for(int c = cell->py - 1; c <= cell->py + 1; c++)
 		{
 			if(r == cell->px && c == cell->py) continue;
-			if(r < 0 || r > row || c < 0 || c > column) continue;
+			if(r < 0 || r >= row || c < 0 || c >= column) continue;
 
 			neighs.push_back(cells[r * column + c]);
 		}
@@ -80,7 +90,20 @@ int Conway::countAliveNeighbours(Cell *cell) const
 	for(vector<Cell*>::iterator iter = neighs.begin(); iter != neighs.end(); ++iter)
 	{
 		count += (*iter)->isAlive() ? 1 : 0;
+		cout << (*iter)->px << (*iter)->py << (*iter)->isAlive() << endl;
 	}
+	cout << endl;
 
 	return count;
+}
+
+void Conway::update(vector<Cell*>& changed)
+{
+	for(vector<Cell*>::iterator iter = changed.begin(); iter != changed.end(); ++iter)
+	{
+		Cell *cell = *iter;
+		delete cells[cell->index()];
+		cells[cell->index()] = cell;
+	}
+
 }

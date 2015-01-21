@@ -10,6 +10,13 @@ TEST(cell_factory_test, gernate_new_cell)
     EXPECT_EQ(' ', factory.NewCell(0, 0, '0')->show());
 }
 
+TEST(conway_game_test, one_step)
+{
+	Conway game;
+	game.getSeed();
+	game.step();
+}
+
 
 int main(int argc, char *argv[])
 {
