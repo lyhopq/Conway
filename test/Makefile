@@ -1,7 +1,7 @@
 EXECUTABLE := main
 LIBS := gtest pthread
-INCLUDES := ../src
-SRCDIR:= . $(INCLUDES)
+INCLUDES := ../include
+SRCDIR:= . ../src
 CC:=g++
 CPPFLAGS := -g -Wall -O3
 CPPFLAGS += $(addprefix -I,$(INCLUDES))

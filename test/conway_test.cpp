@@ -1,15 +1,12 @@
 #include <gtest/gtest.h>
-#include "conway.h"
+#include "cell_factory.h"
+#include "alive.h"
+#include "dead.h"
 
-TEST(CellTest, neighbours)
+TEST(cell_factory_test, gernate_new_cell)
 {
-    EXPECT_EQ(expect, cell.neighbours());
-}
-
-TEST(get_seed_test, get_seed_from_file)
-{
-
-    EXPECT_EQ(expect, get_seed());
+	CellFactory factory;
+    EXPECT_EQ(new Alive(0, 0), factory.NewCell(0, 0, '1'));
 }
 
 
