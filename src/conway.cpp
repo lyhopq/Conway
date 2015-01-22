@@ -11,6 +11,8 @@ using namespace std;
 const char *initalData = "initalData.txt";
 const char *output = "final.txt";
 
+#define ITER VECTOR::const_iterator
+
 void Conway::getSeed()
 {
 	CellFactory factory;
@@ -33,19 +35,12 @@ void Conway::getSeed()
 
 void Conway::step()
 {
-	CellFactory factory;
-	vector<Cell*> changedCells;
-	for(int index = 0; index < cells.size(); index++)
-	{
-		Cell *cell = cells[index];
-		int aliveNeighs = countAliveNeighbours(cell);
-		if(cell->isStatusChanged(aliveNeighs))
-		{
-			changedCells.push_back(factory.changeCell(cell));
-		}
-	}
-
-	update(changedCells);
+    while(1)
+    {
+        VECTOR changedCells = getChangedCells();
+        if(changedCells.size() == 0) break;
+        update(changedCells);
+    }
 }
 
 void Conway::dump() const
@@ -63,9 +58,9 @@ void Conway::dump() const
 	fs.close();
 }
 
-vector<Cell*> Conway::neighbours(Cell *cell) const
+VECTOR Conway::neighbours(const Cell *cell) const
 {
-	vector<Cell*> neighs;
+	VECTOR neighs;
 	for(int r = cell->px - 1; r <= cell->px + 1; r++)
 	{
 		for(int c = cell->py - 1; c <= cell->py + 1; c++)
@@ -80,12 +75,12 @@ vector<Cell*> Conway::neighbours(Cell *cell) const
 	return neighs;
 }
 
-int Conway::countAliveNeighbours(Cell *cell) const
+int Conway::countAliveNeighbours(const Cell *cell) const
 {
-	vector<Cell*> neighs = neighbours(cell);
+	VECTOR neighs = neighbours(cell);
 
 	int count = 0;
-	for(vector<Cell*>::iterator iter = neighs.begin(); iter != neighs.end(); ++iter)
+	for(ITER iter = neighs.begin(); iter != neighs.end(); ++iter)
 	{
 		count += (*iter)->isAlive() ? 1 : 0;
 	}
@@ -93,18 +88,35 @@ int Conway::countAliveNeighbours(Cell *cell) const
 	return count;
 }
 
-void Conway::update(vector<Cell*>& changed)
+VECTOR Conway::getChangedCells() const
 {
-	for(vector<Cell*>::iterator iter = changed.begin(); iter != changed.end(); ++iter)
+    CellFactory factory;
+    VECTOR changedCells;
+    for(ITER iter = cells.begin(); iter != cells.end(); ++iter)
+    {
+        const Cell *cell = *iter;
+        int aliveNeighs = countAliveNeighbours(cell);
+        if(cell->isStatusChanged(aliveNeighs))
+        {
+            changedCells.push_back(factory.changeCell(cell));
+        }
+    }
+
+    return changedCells;
+}
+
+void Conway::update(VECTOR& changed)
+{
+	for(ITER iter = changed.begin(); iter != changed.end(); ++iter)
 	{
-		Cell *cell = *iter;
+		const Cell *cell = *iter;
         int index_ = index(cell);
 		delete cells[index_];
 		cells[index_] = cell;
 	}
 }
 
-int Conway::index(Cell* cell) const
+int Conway::index(const Cell* cell) const
 {
     return index(cell->px, cell->py);
 }
@@ -112,4 +124,12 @@ int Conway::index(Cell* cell) const
 int Conway::index(int r, int c) const
 {
     return r * column + c;
+}
+
+Conway::~Conway()
+{
+    for(ITER iter = cells.begin(); iter != cells.end(); ++iter)
+    {
+        delete *iter;
+    }
 }

@@ -6,24 +6,28 @@
 class ifstrame;
 class Cell;
 
+#define VECTOR std::vector<const Cell*>
+
 class Conway
 {
 public:
+    ~Conway();
+
 	void getSeed();
 	void step();
-
 	void dump() const;
 
 private:
-	std::vector<Cell*> cells;
+	VECTOR cells;
 	int row;
 	int column;
 
-	std::vector<Cell*> neighbours(Cell* cell) const;
-	int countAliveNeighbours(Cell *cell) const;
-	void update(std::vector<Cell*>& changed);
+	VECTOR neighbours(const Cell* cell) const;
+	int countAliveNeighbours(const Cell *cell) const;
+    VECTOR getChangedCells() const;
+	void update(VECTOR& changed);
 
-    int index(Cell* cell) const;
+    int index(const Cell* cell) const;
     int index(int r, int c) const;
 };
 

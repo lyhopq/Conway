@@ -12,12 +12,12 @@ Cell* CellFactory::NewCell(int px, int py, char status)
 	return new Dead(px, py);
 }
 
-Cell* CellFactory::changeCell(Cell *cell)
+Cell* CellFactory::changeCell(const Cell *cell)
 {
 	Cell *newCell;
 	if(cell->isAlive())
 	{
-		newCell = new Dead(cell->px, cell->py);	
+		newCell = new Dead(cell->px, cell->py);
 	}
 	else
 	{
