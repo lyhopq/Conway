@@ -33,14 +33,17 @@ void Conway::getSeed()
 	column = c;
 }
 
-void Conway::step()
+void Conway::propagate()
 {
-    while(1)
-    {
-        VECTOR changedCells = getChangedCells();
-        if(changedCells.size() == 0) break;
-        update(changedCells);
-    }
+    while(!step());
+}
+
+bool Conway::step()
+{
+    VECTOR changedCells = getChangedCells();
+    update(changedCells);
+
+    return changedCells.size() ? false: true;
 }
 
 void Conway::dump() const

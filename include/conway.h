@@ -14,7 +14,8 @@ public:
     ~Conway();
 
 	void getSeed();
-	void step();
+    void propagate();
+	bool step();
 	void dump() const;
 
 private:
