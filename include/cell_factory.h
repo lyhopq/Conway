@@ -6,7 +6,7 @@
 class CellFactory
 {
 public:
-	Cell* NewCell(int px, int py, char status);
-	Cell* changeCell(const Cell* cell);
+	const Cell* NewCell(int px, int py, char status);
+	const Cell* changeCell(const Cell* cell);
 };
 #endif

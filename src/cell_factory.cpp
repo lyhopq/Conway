@@ -2,7 +2,7 @@
 #include "alive.h"
 #include "dead.h"
 
-Cell* CellFactory::NewCell(int px, int py, char status)
+const Cell* CellFactory::NewCell(int px, int py, char status)
 {
 	if('1' == status)
 	{
@@ -12,7 +12,7 @@ Cell* CellFactory::NewCell(int px, int py, char status)
 	return new Dead(px, py);
 }
 
-Cell* CellFactory::changeCell(const Cell *cell)
+const Cell* CellFactory::changeCell(const Cell *cell)
 {
 	Cell *newCell;
 	if(cell->isAlive())
