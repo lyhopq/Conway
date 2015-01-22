@@ -9,7 +9,3 @@ Cell::~Cell()
 {
 }
 
-int Cell::index() const
-{
-	return px * py;
-}

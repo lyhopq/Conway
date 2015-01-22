@@ -16,7 +16,7 @@ bool Alive::isAlive() const
 
 bool Alive::isStatusChanged(int count) const
 {
-	return (count !=2 || count !=3) ? true : false;
+	return (count !=2 && count !=3) ? true : false;
 }
 
 const char Alive::show() const

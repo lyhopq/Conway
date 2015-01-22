@@ -22,6 +22,9 @@ private:
 	std::vector<Cell*> neighbours(Cell* cell) const;
 	int countAliveNeighbours(Cell *cell) const;
 	void update(std::vector<Cell*>& changed);
+
+    int index(Cell* cell) const;
+    int index(int r, int c) const;
 };
 
 #endif

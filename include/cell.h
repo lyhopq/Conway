@@ -11,8 +11,6 @@ public:
 	virtual bool isStatusChanged(int count) const = 0;
 	virtual const char show() const = 0;
 
-	int index() const;
-
 	int px;
 	int py;
 };
