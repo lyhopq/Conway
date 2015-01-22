@@ -19,7 +19,7 @@ bool Dead::isStatusChanged(int count) const
 	return count == 3 ? true : false;
 }
 
-const char Dead::show() const
+const char Dead::encode() const
 {
 	return ' ';
 }

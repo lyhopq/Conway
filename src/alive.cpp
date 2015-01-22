@@ -19,7 +19,7 @@ bool Alive::isStatusChanged(int count) const
 	return (count !=2 && count !=3) ? true : false;
 }
 
-const char Alive::show() const
+const char Alive::encode() const
 {
 	return '$';
 }

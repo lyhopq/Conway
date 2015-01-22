@@ -53,7 +53,7 @@ void Conway::dump() const
 	{
 		for(int c = 0; c < column; c++)
 		{
-			fs << cells[index(r, c)]->show();
+			fs << cells[index(r, c)]->encode();
 		}
 		fs << endl;
 	}

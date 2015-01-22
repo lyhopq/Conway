@@ -9,7 +9,7 @@ public:
 
 	virtual bool isAlive() const = 0;
 	virtual bool isStatusChanged(int count) const = 0;
-	virtual const char show() const = 0;
+	virtual const char encode() const = 0;
 
 	int px;
 	int py;
