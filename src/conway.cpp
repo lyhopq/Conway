@@ -37,7 +37,7 @@ bool Conway::step()
     VECTOR changedCells = getChangedCells();
     update(changedCells);
 
-    return changedCells.size() ? false: true;
+    return isStabilized(changedCells);
 }
 
 string Conway::dump() const
@@ -126,6 +126,11 @@ int Conway::index(const Cell* cell) const
 int Conway::index(int r, int c) const
 {
     return r * column + c;
+}
+
+bool Conway::isStabilized(VECTOR& changed) const
+{
+	return !changed.size();
 }
 
 Conway::~Conway()

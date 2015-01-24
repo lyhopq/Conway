@@ -30,6 +30,7 @@ private:
 	int countAliveNeighbours(const Cell *cell) const;
     VECTOR getChangedCells() const;
 	void update(VECTOR& changed);
+	bool isStabilized(VECTOR& changed) const;
 
     int index(const Cell* cell) const;
     int index(int r, int c) const;
