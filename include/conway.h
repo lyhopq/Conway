@@ -1,10 +1,12 @@
 #ifndef CONWAY
 #define CONWAY
 
+#include <iostream>
 #include <vector>
 
-class ifstrame;
 class Cell;
+
+using namespace std;
 
 #define VECTOR std::vector<const Cell*>
 
@@ -13,16 +15,17 @@ class Conway
 public:
     ~Conway();
 
-	void getSeed();
+	void getSeed(ifstream& data);
     void propagate();
 	bool step();
-	void dump() const;
+	string dump() const;
 
 private:
 	VECTOR cells;
 	int row;
 	int column;
 
+	bool isAlive(const char& c) const;
 	VECTOR neighbours(const Cell* cell) const;
 	int countAliveNeighbours(const Cell *cell) const;
     VECTOR getChangedCells() const;

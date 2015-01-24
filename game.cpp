@@ -1,12 +1,21 @@
-#include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include "conway.h"
+
+const char *initalData = "initalData.txt";
+const char *output = "final.txt";
+
 
 int main(int argc, char *argv[])
 {
 	Conway game;
 
-	game.getSeed();
+	std::ifstream data(initalData);
+	game.getSeed(data);
+	data.close();
     game.propagate();
-	game.dump();
+
+    std::ofstream fs(output);
+	fs << game.dump().c_str();
+	fs.close();
 }

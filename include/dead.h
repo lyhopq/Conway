@@ -11,6 +11,7 @@ public:
 
 	bool isAlive() const;
 	bool isStatusChanged(int count) const;
-	const char encode() const;
+	char encode() const;
+	int present() const;
 };
 #endif

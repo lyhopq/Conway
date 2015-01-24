@@ -11,8 +11,8 @@ using namespace std;
 TEST(cell_factory_test, gernate_new_cell)
 {
 	CellFactory factory;
-    EXPECT_EQ('$', factory.NewCell(0, 0, '1')->encode());
-    EXPECT_EQ(' ', factory.NewCell(0, 0, '0')->encode());
+    EXPECT_EQ('$', factory.NewCell(0, 0, true)->encode());
+    EXPECT_EQ(' ', factory.NewCell(0, 0, false)->encode());
 }
 
 
@@ -35,20 +35,12 @@ TEST(cell_test, check_cell_status_change)
 TEST(conway_test, check_propagate_result)
 {
 	Conway game;
-	game.getSeed();
+	std::ifstream data("initalData.txt");
+	game.getSeed(data);
+	data.close();
 	game.propagate();
-	game.dump();
 
-	ifstream ifs("final.txt");
-	string line;
-
-	getline(ifs, line);
-	EXPECT_EQ(" $ ", line);
-	getline(ifs, line);
-	EXPECT_EQ("$ $", line);
-	getline(ifs, line);
-	EXPECT_EQ(" $ ", line);
-
+	EXPECT_STREQ(" $ \n$ $\n $ \n", game.dump().c_str());
 }
 
 

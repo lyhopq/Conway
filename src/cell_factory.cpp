@@ -2,9 +2,9 @@
 #include "alive.h"
 #include "dead.h"
 
-const Cell* CellFactory::NewCell(int px, int py, char status)
+const Cell* CellFactory::NewCell(int px, int py, bool isAlive)
 {
-	if('1' == status)
+	if(isAlive)
 	{
 		return new Alive(px, py);
 	}
@@ -14,15 +14,5 @@ const Cell* CellFactory::NewCell(int px, int py, char status)
 
 const Cell* CellFactory::changeCell(const Cell *cell)
 {
-	Cell *newCell;
-	if(cell->isAlive())
-	{
-		newCell = new Dead(cell->px, cell->py);
-	}
-	else
-	{
-		newCell = new Alive(cell->px, cell->py);
-	}
-
-	return newCell;
+	return NewCell(cell->px, cell->py, !cell->isAlive());
 }

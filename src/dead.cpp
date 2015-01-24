@@ -16,10 +16,15 @@ bool Dead::isAlive() const
 
 bool Dead::isStatusChanged(int count) const
 {
-	return count == 3 ? true : false;
+	return count == 3;
 }
 
-const char Dead::encode() const
+char Dead::encode() const
 {
 	return ' ';
+}
+
+int Dead::present() const
+{
+	return 0;
 }

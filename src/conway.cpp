@@ -6,25 +6,19 @@
 #include "conway.h"
 #include "cell_factory.h"
 
-using namespace std;
-
-const char *initalData = "initalData.txt";
-const char *output = "final.txt";
-
 #define ITER VECTOR::const_iterator
 
-void Conway::getSeed()
+void Conway::getSeed(ifstream& data)
 {
 	CellFactory factory;
 	int r = 0;
 	int c = 0;
-    ifstream fs(initalData);
 
-	for(string line; getline(fs, line);)
+	for(string line; getline(data, line);)
 	{
 		for(c = 0; c < line.length(); c++)
 		{
-			cells.push_back(factory.NewCell(r, c, line[c]));
+			cells.push_back(factory.NewCell(r, c, isAlive(line[c])));
 		}
 		r++;
 	}
@@ -46,19 +40,19 @@ bool Conway::step()
     return changedCells.size() ? false: true;
 }
 
-void Conway::dump() const
+string Conway::dump() const
 {
-    ofstream fs(output);
+    string str = "";
 	for(int r = 0; r < row; r++)
 	{
 		for(int c = 0; c < column; c++)
 		{
-			fs << cells[index(r, c)]->encode();
+			str += cells[index(r, c)]->encode();
 		}
-		fs << endl;
+		str += "\n";
 	}
 
-	fs.close();
+	return str;
 }
 
 VECTOR Conway::neighbours(const Cell *cell) const
@@ -85,7 +79,7 @@ int Conway::countAliveNeighbours(const Cell *cell) const
 	int count = 0;
 	for(ITER iter = neighs.begin(); iter != neighs.end(); ++iter)
 	{
-		count += (*iter)->isAlive() ? 1 : 0;
+		count += (*iter)->present();
 	}
 
 	return count;
@@ -117,6 +111,11 @@ void Conway::update(VECTOR& changed)
 		delete cells[index_];
 		cells[index_] = cell;
 	}
+}
+
+bool Conway::isAlive(const char& c) const
+{
+	return c == '1';
 }
 
 int Conway::index(const Cell* cell) const

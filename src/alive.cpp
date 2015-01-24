@@ -16,10 +16,15 @@ bool Alive::isAlive() const
 
 bool Alive::isStatusChanged(int count) const
 {
-	return (count !=2 && count !=3) ? true : false;
+	return count !=2 && count !=3;
 }
 
-const char Alive::encode() const
+char Alive::encode() const
 {
 	return '$';
+}
+
+int Alive::present() const
+{
+	return 1;
 }
